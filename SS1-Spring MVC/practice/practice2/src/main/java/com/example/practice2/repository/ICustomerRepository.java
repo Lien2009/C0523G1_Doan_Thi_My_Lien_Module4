@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ICustomerRepository {
     List<Customer> getAll();
+    Customer findById(int id);
+    void update(Customer customer);
 }

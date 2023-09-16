@@ -18,8 +18,8 @@ public class CalculatorController {
     }
 
     @PostMapping("/calculator")
-    public String calculate(@RequestParam int rate, @RequestParam int usd, Model model){
-        int vnd = calculatorService.calculator(rate,usd);
+    public String calculate(@RequestParam double rate, @RequestParam double usd, Model model){
+        double vnd = calculatorService.calculator(rate,usd);
         model.addAttribute("vnd",vnd);
         return "calculator";
     }

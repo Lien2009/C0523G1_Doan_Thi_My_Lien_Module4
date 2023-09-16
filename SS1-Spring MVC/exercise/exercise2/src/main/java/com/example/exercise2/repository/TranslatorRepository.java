@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class TranslatorRepository {
+public class TranslatorRepository implements ITranslatorRepository {
     private static Map<String, String> dictionary = new HashMap<>();
 
     static {
@@ -18,13 +18,8 @@ public class TranslatorRepository {
         dictionary.put("six", "sáu");
     }
 
-    public String find(String english) {
-        String result = null;
-        if(dictionary.containsKey(english)){
-            result = dictionary.get(english);
-        } else {
-            result = "Not found";
-        }
+    public String translate(String english) {
+        String result = dictionary.get(english);
         return result;
     }
 }

@@ -26,7 +26,7 @@
   <c:forEach var="c" items="${customers}" varStatus="loop">
     <tr>
       <td>${loop.count}</td>
-      <td>${c.name}</td>
+      <td><a href="/customers/${c.id}">${c.name}</a></td>
       <td>${c.email}</td>
       <td>${c.address}</td>
     </tr>

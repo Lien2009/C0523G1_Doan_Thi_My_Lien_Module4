@@ -18,9 +18,8 @@ public class TranslatorController {
     }
     @PostMapping("translator")
     public String find(@RequestParam String english, Model model){
-        String vietnamese = tranlatorService.find(english);
+        String vietnamese = tranlatorService.translate(english);
         model.addAttribute("vietnamese",vietnamese);
         return "translator";
     }
-
 }
