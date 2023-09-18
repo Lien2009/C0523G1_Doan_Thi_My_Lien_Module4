@@ -18,6 +18,8 @@ public class TranslatorRepository implements ITranslatorRepository {
         dictionary.put("six", "sáu");
     }
 
+
+    @Override
     public String translate(String english) {
         String result = dictionary.get(english);
         return result;

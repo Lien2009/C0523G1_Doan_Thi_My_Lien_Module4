@@ -1,5 +1,6 @@
 package com.example.exercise2.controller;
 
+import com.example.exercise2.service.ITranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +12,14 @@ import com.example.exercise2.service.TranlatorService;
 @Controller
 public class TranslatorController {
     @Autowired
-    private TranlatorService tranlatorService;
+    private ITranslatorService translatorService;
     @GetMapping("")
     public String showTrans(){
         return "translator";
     }
     @PostMapping("translator")
     public String find(@RequestParam String english, Model model){
-        String vietnamese = tranlatorService.translate(english);
+        String vietnamese = translatorService.translate(english);
         model.addAttribute("vietnamese",vietnamese);
         return "translator";
     }

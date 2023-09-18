@@ -1,6 +1,7 @@
 package com.example.exercise1.controller;
 
 import com.example.exercise1.service.CalculatorService;
+import com.example.exercise1.service.ICalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CalculatorController {
     @Autowired
-    private CalculatorService calculatorService;
+    private ICalculatorService calculatorService;
     @GetMapping("")
     public String showCalculator(){
         return "calculator";
