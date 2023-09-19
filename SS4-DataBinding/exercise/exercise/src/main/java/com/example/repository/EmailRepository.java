@@ -8,9 +8,9 @@ import java.util.List;
 
 @Repository
 public class EmailRepository implements IEmailRepository {
-    private static String[] languageList = {"English","Vietnamese","Japanese","Chinese"};
-    private static int[] sizeList = {5, 10, 15, 25, 50, 100};
-    private static Email email = new Email("English", 5, true, "Lien");
+    private String[] languageList = {"English","Vietnamese","Japanese","Chinese"};
+    private int[] sizeList = {5, 10, 15, 25, 50, 100};
+    private Email email = new Email("English", 5, true, "Lien");
 
     @Override
     public Email display() {

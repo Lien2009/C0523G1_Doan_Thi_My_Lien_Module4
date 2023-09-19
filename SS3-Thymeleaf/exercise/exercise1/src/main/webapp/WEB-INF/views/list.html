@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách</title>
+    <style>
+        #table{
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th,td{
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+<a href="/products/create">Thêm mới</a>
+<form action="/products/find" method="post">
+    <input type="text" name="name" id="name">
+    <button>Search</button>
+</form>
+<table id="table">
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Company</th>
+        <th colspan="3">Action</th>
+    </tr>
+    <tr th:each="product,status:${products}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.company}"></td>
+        <td><a th:href="@{/products/update/__${product.id}__}">Update</a></td>
+        <td><a th:href="@{/products/delete/__${product.id}__}">Delete</a></td>
+        <td><a th:href="@{/products/detail/__${product.id}__}">Detail</a></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

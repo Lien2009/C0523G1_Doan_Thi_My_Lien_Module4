@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa</title>
+</head>
+<body>
+<h1>Sửa sản phẩm</h1>
+<form th:object="${product}" th:action="@{/products/update}" method="post">
+    <table>
+        <tr>
+            <td><input type="hidden" th:field="*{id}"></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input th:field="*{price}"></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input th:field="*{description}"></td>
+        </tr>
+        <tr>
+            <td>Company:</td>
+            <td><input th:field="*{company}"></td>
+        </tr>
+    </table>
+    <button>Save</button>
+    <button><a href="/products">Back</a></button>
+    <div th:if="${message != null}" th:text="${message}">
+    </div>
+</form>
+</body>
+</html>
