@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết</title>
+  <style>
+    #table{
+      display: table;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th,td{
+      border: 1px solid;
+    }
+    body{
+      text-align: center;
+    }
+
+  </style>
+  <th:block th:replace="layout::styleHeader"></th:block>
+</head>
+<body>
+<div th:replace="layout::header">
+</div>
+<h2>Danh sách sản phẩm</h2>
+<table id="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Company</th>
+  </tr>
+  <tr th:object="${product}">
+    <td th:text="${product.id}"></td>
+    <td th:text="${product.name}"></td>
+    <td th:text="${product.price}"></td>
+    <td th:text="${product.description}"></td>
+    <td th:text="${product.company}"></td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

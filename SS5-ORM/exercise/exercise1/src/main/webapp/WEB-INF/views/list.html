@@ -12,10 +12,16 @@
         th,td{
             border: 1px solid;
         }
+        body{
+            text-align: center;
+        }
     </style>
+    <th:block th:replace="layout::styleHeader"></th:block>
 </head>
 <body>
-<h1>Danh sách sản phẩm</h1>
+<div th:replace="layout::header">
+</div>
+<h2>Danh sách sản phẩm</h2>
 <a href="/products/create">Thêm mới</a>
 <form action="/products/find" method="post">
     <input type="text" name="name" id="name">

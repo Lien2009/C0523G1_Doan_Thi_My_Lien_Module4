@@ -25,6 +25,7 @@ public class ProductRepository implements IProductRepository {
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getId() == id) {
                 index = i;
+                break;
             }
         }
         return index;
@@ -61,9 +62,10 @@ public class ProductRepository implements IProductRepository {
     public List<Product> findByName(String name) {
         List<Product> products = new ArrayList<>();
         for (int i = 0; i < productList.size(); i++) {
-            if(name.equals(productList.get(i).getName())){
+            if(productList.get(i).getName().equals(name)){
                 products.add(productList.get(i));
             }
+            break;
         }
         return products;
     }

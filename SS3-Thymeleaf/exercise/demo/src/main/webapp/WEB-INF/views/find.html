@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #table{
+      display: table;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th,td{
+      border: 1px solid;
+    }
+  </style>
+</head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+<table id="table">
+  <tr>
+    <th>STT</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Company</th>
+  </tr>
+  <tr>
+
+  </tr>
+  <tr th:each="product,status:${products}">
+    <td th:text="${status.count}"></td>
+    <td th:text="${product.name}"></td>
+    <td th:text="${product.price}"></td>
+    <td th:text="${product.description}"></td>
+    <td th:text="${product.company}"></td>
+  </tr>
+  <tr th:if="${products.isEmpty()}">
+    <td colspan="5">Không có sản phẩm nào tên này</td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
