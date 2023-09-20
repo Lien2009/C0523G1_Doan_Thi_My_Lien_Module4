@@ -37,8 +37,13 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public void create(Product product) {
-        productList.add(product);
+    public boolean create(Product product) {
+        if (productList.contains(product)) {
+            return false;
+        } else {
+            productList.add(product);
+            return true;
+        }
     }
 
     @Override

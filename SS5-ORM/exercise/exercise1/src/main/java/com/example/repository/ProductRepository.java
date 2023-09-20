@@ -16,16 +16,6 @@ public class ProductRepository implements IProductRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public int findIndex(int id) {
-//        int index = -1;
-//        for (int i = 0; i < productList.size(); i++) {
-//            if (productList.get(i).getId() == id) {
-//                index = i;
-//            }
-//        }
-        return 0;
-    }
 
     @Override
     public List<Product> showAll() {
@@ -35,8 +25,13 @@ public class ProductRepository implements IProductRepository {
 
     @Transactional
     @Override
-    public void create(Product product) {
-        entityManager.persist(product);
+    public boolean create(Product product) {
+        if (showAll().contains(product)) {
+            return false;
+        } else {
+            entityManager.persist(product);
+            return true;
+        }
     }
     @Transactional
     @Override

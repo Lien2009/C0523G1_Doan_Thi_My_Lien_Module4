@@ -1,4 +1,4 @@
-package com.example.congiguration;
+package com.example.configuration;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;

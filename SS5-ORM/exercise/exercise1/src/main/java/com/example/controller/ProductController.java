@@ -33,8 +33,12 @@ public class ProductController {
     @PostMapping("create")
     public String create(@ModelAttribute Product product,
                          RedirectAttributes redirectAttributes) {
-        productService.create(product);
-        redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
+        boolean result = productService.create(product);
+        if (result == false) {
+            redirectAttributes.addFlashAttribute("message", "SP này đã tồn tại!");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
+        }
         return "redirect:/products/create";
     }
 
