@@ -2,11 +2,12 @@ package com.example.repository;
 
 import com.example.model.Product;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@Repository
 public class ProductRepository implements IProductRepository {
     private static final List<Product> productList = new ArrayList<>();
 
