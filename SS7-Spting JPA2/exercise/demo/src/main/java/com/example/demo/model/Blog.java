@@ -1,14 +1,17 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "title", unique = true)
     private String title;
     @Column(columnDefinition = "text")
+    @NotEmpty
     private String content;
     private String author;
     @Column(columnDefinition = "date")
