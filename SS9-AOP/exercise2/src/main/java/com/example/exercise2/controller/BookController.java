@@ -48,7 +48,7 @@ public class BookController {
         Book book = bookService.findByCode(code);
         book.setQuantity(book.getQuantity() + 1);
         bookService.add(book);
-        orderService.delete(book.getId());
+        orderService.delete(code);
         redirectAttributes.addFlashAttribute("message", "Trả sách thành công!");
         return "redirect:/books";
     }
