@@ -38,5 +38,8 @@ public class OrderService implements IOrderService {
         return orders != null ? orders.getCode() : -1;
     }
 
-
+    @Override
+    public void delete(int id) {
+        orderRepository.deleteById(id);
+    }
 }

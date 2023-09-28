@@ -3,6 +3,7 @@ package com.example.exercise2.controller;
 
 import com.example.exercise2.model.Book;
 import com.example.exercise2.service.IBookService;
+import com.example.exercise2.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ import java.util.List;
 public class BookController {
     @Autowired
     private IBookService bookService;
+    @Autowired
+    private IOrderService orderService;
 
     @GetMapping("")
     public ModelAndView showAll() {
@@ -45,6 +48,7 @@ public class BookController {
         Book book = bookService.findByCode(code);
         book.setQuantity(book.getQuantity() + 1);
         bookService.add(book);
+        orderService.delete(book.getId());
         redirectAttributes.addFlashAttribute("message", "Trả sách thành công!");
         return "redirect:/books";
     }
