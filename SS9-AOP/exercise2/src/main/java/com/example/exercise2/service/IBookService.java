@@ -9,5 +9,5 @@ public interface IBookService {
     List<Book> findAll();
     boolean add(Book book);
     Book findById(int id);
-    Book findByCode(int code);
+
 }

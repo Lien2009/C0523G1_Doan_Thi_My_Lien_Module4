@@ -1,9 +1,11 @@
 package com.example.exercise2.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class RentBookDTO {
 
     private int bookId;
-
+    @NotBlank(message = "Please enter your name!")
     private String orderName;
 
     public RentBookDTO() {

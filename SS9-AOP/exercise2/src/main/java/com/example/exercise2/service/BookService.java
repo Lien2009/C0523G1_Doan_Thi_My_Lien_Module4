@@ -29,8 +29,5 @@ public class BookService implements IBookService {
         return bookRepository.findById(id).get();
     }
 
-    @Override
-    public Book findByCode(int code) {
-        return bookRepository.findByCode(code);
-    }
+
 }

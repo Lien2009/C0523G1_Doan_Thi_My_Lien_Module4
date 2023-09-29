@@ -42,14 +42,5 @@ public class BookController {
         return "redirect:/books/create";
     }
 
-    @GetMapping("return")
-    public String returnBook(@RequestParam int code,
-                             RedirectAttributes redirectAttributes) {
-        Book book = bookService.findByCode(code);
-        book.setQuantity(book.getQuantity() + 1);
-        bookService.add(book);
-        orderService.delete(code);
-        redirectAttributes.addFlashAttribute("message", "Trả sách thành công!");
-        return "redirect:/books";
-    }
+
 }

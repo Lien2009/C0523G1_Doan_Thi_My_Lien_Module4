@@ -6,5 +6,6 @@ import com.example.exercise2.model.Book;
 
 public interface IOrderService {
     int add(RentBookDTO rentBookDTO) throws Exception;
-    void delete(int id);
+    Book findByCode(int code);
+    void updateOderStatus(int code);
 }

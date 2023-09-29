@@ -14,6 +14,7 @@
   <div class="mb-3">
     <label for="formGroupExampleInput" class="form-label">Tên</label>
     <input th:field="*{orderName}" type="text" class="form-control" id="formGroupExampleInput" placeholder="Tên">
+    <small style="color: red" th:if="${#fields.hasErrors('orderName')}" th:errors="*{orderName}"></small>
   </div>
 
   <button class="btn btn-outline-info">Save</button>

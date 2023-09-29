@@ -32,6 +32,10 @@ public class OrderService implements IOrderService {
         }
         Orders orders = new Orders();
         orders.setName(rentBookDTO.getOrderName());
+        int code = 0;
+        do{
+            code =  (int) (Math.random() * 90000) + 10000;
+        }while (orderRepository.findByCode(code) != null);
         orders.setCode((int) (Math.random() * 100000));
         orders.setBook(bookRepository.findById(rentBookDTO.getBookId()).get());
         orders = orderRepository.save(orders);
@@ -39,7 +43,12 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void delete(int id) {
-        orderRepository.deleteById(id);
+    public Book findByCode(int code) {
+        return orderRepository.findByCode(code);
+    }
+
+    @Override
+    public void updateOderStatus(int code) {
+        orderRepository.updateOderStatus(code);
     }
 }

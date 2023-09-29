@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class Logger {
-    private static int count = 0;
+    private int count = 0;
     @After("execution(* com.example.exercise2.controller.*.*Book(..))")
     public void countChangeQuantityBook(){
         count++;

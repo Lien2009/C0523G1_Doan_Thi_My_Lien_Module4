@@ -10,6 +10,8 @@ public class Orders {
     @Column(name = "code", unique = true)
     private int code;
     private String name;
+    @Column(columnDefinition = "boolean default false")
+    private boolean status;
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
@@ -21,6 +23,14 @@ public class Orders {
         this.id = id;
         this.code = code;
         this.name = name;
+        this.book = book;
+    }
+
+    public Orders(int id, int code, String name, boolean status, Book book) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.status = status;
         this.book = book;
     }
 
@@ -54,5 +64,13 @@ public class Orders {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
