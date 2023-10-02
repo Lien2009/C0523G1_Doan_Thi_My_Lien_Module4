@@ -1,7 +1,8 @@
-package com.example.exercise.controller;
+package com.example.demo.controller;
 
-import com.example.exercise.model.Blog;
-import com.example.exercise.service.IBlogService;
+
+import com.example.demo.model.Blog;
+import com.example.demo.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +16,22 @@ import java.util.List;
 public class RestBlogController {
     @Autowired
     private IBlogService blogService;
-    @GetMapping("")
-    public ResponseEntity<List<Blog>> getList(){
-        List<Blog> blogList = blogService.getList();
+    @GetMapping("/load/{start}/{count}")
+    public ResponseEntity<List<Blog>> loadBlogs(@PathVariable int start,
+                                                @PathVariable int count){
+        List<Blog> blogList = blogService.loadBlogs(start,count);
         if(blogList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
+            return new ResponseEntity<>(blogList,HttpStatus.OK);
+        }
+    }
+    @GetMapping("/search/{title}")
+    public ResponseEntity<List<Blog>> findBlogByName(@PathVariable String title){
+        List<Blog> blogList = blogService.findByTitle(title);
+        if(blogList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
             return new ResponseEntity<>(blogList,HttpStatus.OK);
         }
     }
