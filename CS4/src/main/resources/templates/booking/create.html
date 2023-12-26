@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+    <link rel="stylesheet" href="/public/customer/edit.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppimns', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #e1d6d6, #188038);
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+        }
+
+        .container .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .container .title::before {
+            content: '';
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            background: linear-gradient(135deg, #e1d6d6, #188038);
+        }
+
+        .container form .user-details {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        form .user-details .input -box {
+            margin: 20px 0 12px 0;
+            width: calc(100% / 2 - 20px);
+        }
+
+        .user-details .input-box .details {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .user-details .input-box input {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding-left: 15px;
+            font-size: 16px;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .user-details .input-box input:focus,
+        .user-details .input-box input:valid {
+            border-color: #9b59b6;
+        }
+
+        form .button {
+            height: 45px;
+            margin: 45px 0;
+        }
+
+        form .button input {
+            cursor: pointer;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 5px;
+            letter-spacing: 1px;
+            border: none;
+            transition: ease-in-out 1s;
+            background: linear-gradient(135deg, #e1d6d6, #188038);
+        }
+
+        form .button input:hover {
+            background: linear-gradient(-135deg, #e1d6d6, #188038);
+        }
+    </style>
+
+</head>
+<body>
+<!--thông báo thêm thành công-->
+<div th:if="${message}">
+    <span th:text="${message}" id="success" style="display: none"></span>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let fail = document.getElementById("success").innerText;
+        console.log(fail)
+        Swal.fire({
+            title: fail,
+            icon: 'success',
+            timer: 3000,
+            timerProgressBar: true,
+            showConfirmButton: false
+        });
+    });
+</script>
+<!--end-->
+<div class="container">
+    <div class="title">Đặt Sân</div>
+    <form action="/bookings/create" method="post" th:object="${bookingDto}">
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Khách hàng</span>
+                <input th:value="${customer.getName()}" type="text" disabled>
+                <input type="hidden" th:field="*{customer}">
+            </div>
+            <div class="input-box">
+                <span class="details">Cọc (đơn vị: VND)</span>
+                <input th:value="${#numbers.formatDecimal(bookingDto.deposit, 0, 'COMMA', 0, 'POINT')}" type="text" disabled>
+                <input th:field="*{deposit}" type="hidden">
+            </div>
+            <div class="input-box">
+                <span class="details">Tên sân</span>
+                <input type="text" th:value="${yard.getName()}" disabled>
+                <input type="hidden" th:field="*{yard}">
+            </div>
+            <div class="input-box">
+                <span class="details">Ngày đặt</span>
+                <input th:field="*{bookingDate}" type="date" placeholder="Chọn ngày" required>
+                <small style="color: red" th:if="${#fields.hasErrors('bookingDate')}"
+                       th:errors="*{bookingDate}"></small>
+                <small style="color: red" th:if="${error != null}"
+                       th:text="${error}"></small>
+            </div>
+            <div class="input-box">
+                <span for="formGroupExampleInput5" class="details">Khung giờ</span>
+                <select style="width: 100%;
+    height: 2.4rem;
+    border-radius: 10px" id="formGroupExampleInput5" name="time" th:field="*{time}">
+                    <option th:each="time : ${timeList}" th:value="${time.id}" th:text="${time.time}"></option>
+                </select>
+                <small style="color: red" th:if="${#fields.hasErrors('time')}"
+                       th:errors="*{time}"></small>
+                <small style="color: red" th:if="${full != null}"
+                       th:text="${full}"></small>
+            </div>
+        </div>
+
+        <div class="button">
+            <input type="submit" value="Xong">
+        </div>
+        <div>
+            <button class="btn btn-outline-dark" style="color: black"><a href="/yards">Trở về</a></button>
+        </div>
+
+    </form>
+
+    <!--        <form action="/bookings/showConfirm" method="post" th:object="${booking}">-->
+    <!--&lt;!&ndash;            <div><input type="hidden" name="booking" th:value="${booking}"></div>&ndash;&gt;-->
+    <!--            <input type="submit" value="Thanh toán">-->
+    <!--        </form>-->
+
+    <!--    <div class="button">-->
+    <!--        <a href="/bookings/confirm">-->
+    <!--            <div><input type="hidden" name="booking" th:value="${booking}"></div>-->
+    <!--            <input type="submit" value="Thanh toán">-->
+    <!--        </a>-->
+    <!--    </div>-->
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+ -- Kéo chạy 1 lần
+insert into app_accounts(username,`password`)
+values("admin","$2a$10$7Xx6Bm.afmRkomUxG0f0VuCUfGlTuS3uKajqnZYC2BGLx/8/e89xa"),
+("employee","$2a$10$7Xx6Bm.afmRkomUxG0f0VuCUfGlTuS3uKajqnZYC2BGLx/8/e89xa"),
+("user","$2a$10$7Xx6Bm.afmRkomUxG0f0VuCUfGlTuS3uKajqnZYC2BGLx/8/e89xa");
+
+insert into app_roles(role_name)
+values("ROLE_ADMIN"),("ROLE_EMPLOYEE"),("ROLE_USER");
+
+insert into account_role(account_id,role_id)
+value(1,1),(1,2),(1,3),(2,2),(2,3),(3,3);
+
+insert into employees(email,identity_number,name,phone_number,account_id)
+values("admin@gmail.com",123456789,"Admin","1234567890",3),
+("lam@gmail.com",123456789,"Nguyễn Văn Lâm","1234567890",2);
+insert into times(time)
+values(4),(5);
+
+INSERT INTO `yarnd`.`yards` (`address`, `description`, `image`, `is_deleted`, `name`, `price`) VALUES ('Ngã tư giao nhau Đường Võ Chí Công + Đường 29/3 – TP Đà Nẵng.', 'Sân vận động', 'https://www.sporta.vn/assets/default_venue_0-e494b320da87abbd4ddfe23541bdda5436b6b1b42be5b2549ca628f991985e92.jpg', '0', 'Xuân 68', '300000');
+
+INSERT INTO `yarnd`.`customers` (`address`, `birthday`, `email`, `name`, `phone_number`, `account_id`) VALUES ('20 Lê Duẩn', '2000-01-01', 'mylien200996@gmail.com', 'Đoàn Thị Mỹ Liên', '0705995801', '3');
+
+
+
+
+
+
+
+
